@@ -60,7 +60,7 @@ export function Navbar() {
             className="flex items-center gap-2 font-bold text-xl hover:text-theme-primary transform hover:scale-105 transition-all duration-300"
           >
             <ShoppingBag className="w-6 h-6" />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-theme-primary to-theme-secondary hover:from-theme-secondary hover:to-theme-primary transition-all duration-500">
+            <span className="text-black font-bold">
               ModernShop
             </span>
           </Link>
@@ -73,7 +73,7 @@ export function Navbar() {
                 className="text-theme-muted hover:text-theme-primary transition-all duration-300 relative group py-1 overflow-hidden flex items-center gap-2"
               >
                 <item.icon className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-theme-muted to-theme-muted group-hover:from-theme-primary group-hover:to-theme-secondary transition-all duration-300">
+                <span className="text-gray-700 group-hover:text-theme-primary transition-all duration-300">
                   {item.label}
                 </span>
                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-theme-primary to-theme-secondary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
@@ -82,6 +82,28 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-4">
+            <Sheet>
+              <SheetTrigger asChild className="md:hidden">
+                <Button variant="ghost" size="icon" className="hover:bg-theme-primary/10">
+                  <Menu className="w-5 h-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-64">
+                <div className="flex flex-col gap-4 mt-4">
+                  {menuItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="flex items-center gap-2 text-theme-muted hover:text-theme-primary transition-all duration-300"
+                    >
+                      <item.icon className="w-5 h-5" />
+                      <span>{item.label}</span>
+                    </Link>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
+
             <div className="relative">
               <Button 
                 variant="ghost" 
@@ -90,7 +112,7 @@ export function Navbar() {
                 onClick={() => setIsNotificationOpen(!isNotificationOpen)}
               >
                 <Bell className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-theme-primary to-theme-secondary text-white rounded-full text-xs flex items-center justify-center animate-pulse group-hover:from-theme-secondary group-hover:to-theme-primary transition-all duration-300">
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center pointer-events-none">
                   3
                 </span>
               </Button>
@@ -142,7 +164,7 @@ export function Navbar() {
                 )}
               </AnimatePresence>
             </div>
-            
+
             <Link href="/cart">
               <Button 
                 variant="ghost" 
@@ -150,7 +172,7 @@ export function Navbar() {
                 className="relative hover:bg-theme-primary/10 transform hover:scale-110 transition-all duration-300 group"
               >
                 <ShoppingCart className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-theme-primary to-theme-secondary text-white rounded-full text-xs flex items-center justify-center pointer-events-none animate-pulse group-hover:from-theme-secondary group-hover:to-theme-primary transition-all duration-300">
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center pointer-events-none">
                   2
                 </span>
               </Button>
@@ -165,48 +187,9 @@ export function Navbar() {
                 <User className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
               </Button>
             </Link>
-
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  className="md:hidden hover:bg-theme-primary/10 transform hover:scale-110 transition-all duration-300 group"
-                >
-                  <Menu className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent>
-                <div className="flex flex-col gap-4">
-                  <Link 
-                    href="/" 
-                    className="flex items-center gap-2 font-bold text-xl"
-                  >
-                    <ShoppingBag className="w-6 h-6" />
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-theme-primary to-theme-secondary">
-                      ModernShop
-                    </span>
-                  </Link>
-                  <div className="flex flex-col gap-4">
-                    {menuItems.map((item) => (
-                      <Link 
-                        key={item.href}
-                        href={item.href} 
-                        className="text-theme-muted hover:text-theme-primary hover:translate-x-2 transition-all duration-300 flex items-center gap-2"
-                      >
-                        <item.icon className="w-4 h-4" />
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-theme-muted to-theme-muted hover:from-theme-primary hover:to-theme-secondary transition-all duration-300">
-                          {item.label}
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </SheetContent>
-            </Sheet>
           </div>
         </div>
       </div>
     </nav>
   )
-} 
+}
